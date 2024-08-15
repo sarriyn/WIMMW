@@ -1,3 +1,7 @@
+LineEdit
+MultiplayerSpawner
+MultiplayerSynchronizer
+Button
 Node3D
 MeshInstance3D
 CollisionShape3D
