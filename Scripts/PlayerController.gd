@@ -4,9 +4,10 @@ class_name PlayerController;
 var playerInputChecker : PlayerInputChecker;
 var playerCameraMovement : PlayerCameraMovement;
 
+# Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int());
-	$Neck/Camera3D.current = is_multiplayer_authority();
+	set_multiplayer_authority(name.to_int()); # Set multiplayer authority for this specific game instance
+	$Neck/Camera3D.current = is_multiplayer_authority(); # Set the camera current based on if they're the multiplayer authority or not
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
