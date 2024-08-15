@@ -4,6 +4,10 @@ class_name PlayerController;
 var playerInputChecker : PlayerInputChecker;
 var playerCameraMovement : PlayerCameraMovement;
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int());
+	$Neck/Camera3D.current = is_multiplayer_authority();
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playerInputChecker = PlayerInputChecker.new(self); # Initialize PlayerInputChecker and pass self
@@ -16,7 +20,8 @@ func _process(delta : float) -> void:
 # Called before all the physics calculations
 # NOTE: Capped at 60 FPS
 func _physics_process(delta : float) -> void:
-	playerInputChecker.InputCheck(delta); # Check player's Input
+	if is_multiplayer_authority():
+		playerInputChecker.InputCheck(delta); # Check player's Input
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.
