@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://krrc1stj2ewv"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenuController.gd" id="1_qqs5e"]
-[ext_resource type="PackedScene" uid="uid://wfbkfafvgkcm" path="res://Scenes/main.tscn" id="2_etcdj"]
-[ext_resource type="PackedScene" uid="uid://ckbd3bkaiuuar" path="res://Scenes/Player.tscn" id="2_o8ha7"]
+[ext_resource type="PackedScene" uid="uid://wfbkfafvgkcm" path="res://scenes/main.tscn" id="2_etcdj"]
+[ext_resource type="PackedScene" uid="uid://ckbd3bkaiuuar" path="res://scenes/Player.tscn" id="2_o8ha7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -34,6 +34,7 @@ offset_bottom = 71.0
 text = "Host"
 
 [node name="Join" type="Button" parent="."]
+layout_mode = 0
 offset_top = 80.0
 offset_right = 38.0
 offset_bottom = 111.0
