@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gaf0e8hv71py"
-path.s3tc="res://.godot/imported/level1_Concrete034_1K-JPG_Roughness.png-dc2222d0dbd2259e8e914ee39e535f7d.s3tc.ctex"
+path.s3tc="res://.godot/imported/level1_Concrete034_1K-JPG_Roughness.png-277a0b5a6b2fcbc259e17c04b08b6766.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://levels/level1/level1_Concrete034_1K-JPG_Roughness.png"
-dest_files=["res://.godot/imported/level1_Concrete034_1K-JPG_Roughness.png-dc2222d0dbd2259e8e914ee39e535f7d.s3tc.ctex"]
+source_file="res://Levels/level1/level1_Concrete034_1K-JPG_Roughness.png"
+dest_files=["res://.godot/imported/level1_Concrete034_1K-JPG_Roughness.png-277a0b5a6b2fcbc259e17c04b08b6766.s3tc.ctex"]
 
 [params]
 

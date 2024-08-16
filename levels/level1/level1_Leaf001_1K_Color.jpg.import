@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u24ojtsroa57"
-path.s3tc="res://.godot/imported/level1_Leaf001_1K_Color.jpg-8af68fae3c70cfac5eb1b8e0e492b596.s3tc.ctex"
+uid="uid://ctklwriub4f46"
+path.s3tc="res://.godot/imported/level1_Leaf001_1K_Color.jpg-4ea24ea0e55c9176b3f9204b536572d1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "ac03a214b3b9810f3ad81ec67bf6caff"
-}
 
 [deps]
 
-source_file="res://levels/level1/level1_Leaf001_1K_Color.jpg"
-dest_files=["res://.godot/imported/level1_Leaf001_1K_Color.jpg-8af68fae3c70cfac5eb1b8e0e492b596.s3tc.ctex"]
+source_file="res://Levels/level1/level1_Leaf001_1K_Color.jpg"
+dest_files=["res://.godot/imported/level1_Leaf001_1K_Color.jpg-4ea24ea0e55c9176b3f9204b536572d1.s3tc.ctex"]
 
 [params]
 

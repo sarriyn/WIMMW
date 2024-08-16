@@ -20,9 +20,9 @@ var neck : Node3D;
 # It sets the instance's variables to their defaults,
 # and grabs the PlayerController reference from the parameter
 func _init(playerController : PlayerController) -> void:
-	acceleration = 2.0
-	deceleration = 6.0
-	speed = 40.0;
+	acceleration = 3.0
+	deceleration = 8.333
+	speed = 22.0;
 	fallAcceleration = 4.5;
 	airControl = 0.1
 	jumpVelocity = 10.0
@@ -86,6 +86,14 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		print(" is not on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
+		
+	if !playerControllerReference.is_on_floor() and playerControllerReference.get_slide_collision_count() > 0:
+		for i in range(playerControllerReference.get_slide_collision_count()):
+			var collision = playerControllerReference.get_slide_collision(i)
+			if collision.get_normal().dot(Vector3.UP) <0.1: # Check if the collision is mostly horizontal
+				playerVelocity.x = playerVelocity.x * 0.94
+				playerVelocity.z = playerVelocity.z * 0.94
+				break
 	
 	playerControllerReference.velocity = playerVelocity;
 	playerControllerReference.move_and_slide();
