@@ -27,4 +27,3 @@ func InputCheck(delta : float) -> void:
 
 	playerMovementPhysics.DirectionNormalize();
 	playerMovementPhysics.HorizontalAndVerticalVelocityAdjust(delta);
-
