@@ -51,15 +51,11 @@ func MoveBackward() -> void:
 
 # Makes the player jump, if they're on a floor
 func Jump(delta) -> void:
-	print('pre jump')
-	if not playerControllerReference.is_on_floor():
-		playerVelocity.y += gravity * delta
-	else:
+	if playerControllerReference.is_on_floor():
 		if playerVelocity.y > 0:
 			playerVelocity.y = 0
 		if Input.is_action_just_pressed("jump"):
 			playerVelocity.y  = jumpVelocity
-	
 
 # Normalizes the direction if it's not ZERO
 func DirectionNormalize() -> void:
@@ -91,8 +87,8 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		for i in range(playerControllerReference.get_slide_collision_count()):
 			var collision = playerControllerReference.get_slide_collision(i)
 			if collision.get_normal().dot(Vector3.UP) <0.1: # Check if the collision is mostly horizontal
-				playerVelocity.x = playerVelocity.x * 0.94
-				playerVelocity.z = playerVelocity.z * 0.94
+				playerVelocity.x = playerVelocity.x * 0.04
+				playerVelocity.z = playerVelocity.z * 0.04
 				break
 	
 	playerControllerReference.velocity = playerVelocity;
