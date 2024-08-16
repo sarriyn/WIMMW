@@ -20,9 +20,9 @@ var neck : Node3D;
 # It sets the instance's variables to their defaults,
 # and grabs the PlayerController reference from the parameter
 func _init(playerController : PlayerController) -> void:
-	acceleration = 40.0
+	acceleration = 2.0
 	deceleration = 6.0
-	speed = 400.0;
+	speed = 40.0;
 	fallAcceleration = 4.5;
 	airControl = 0.1
 	jumpVelocity = 10.0
@@ -72,8 +72,6 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 	print(delta)
 	var targetVelocity = direction * speed
 	var effectiveDecel = acceleration if direction.length() > 0 else deceleration
-	#playerVelocity.x = direction.x * speed;
-	#playerVelocity.z = direction.z * speed;
 	
 	if direction != Vector3.ZERO:
 		targetVelocity = direction * speed
@@ -81,22 +79,13 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 	
 	if playerControllerReference.is_on_floor():
 		print(" is on floor ")
-		playerVelocity.x = lerp(playerVelocity.x, direction.x, delta * effectiveDecel)
-		playerVelocity.z = lerp(playerVelocity.z, direction.z, delta * effectiveDecel)
+		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
+		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
 	else:
 		playerVelocity.y += gravity * delta
 		print(" is not on floor ")
-		playerVelocity.x = lerp(playerVelocity.x, direction.x, delta * acceleration * airControl)
-		playerVelocity.z = lerp(playerVelocity.z, direction.z, delta * acceleration * airControl)
-	
-	#if playerControllerReference.is_on_floor():
-		#print("is on floor")
-		#playerVelocity.x = direction.x * lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
-		#playerVelocity.z = direction.z * lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
-	#else:
-		#print("not on floor")
-		#playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl);
-		#playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl);
+		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
+		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
 	
 	playerControllerReference.velocity = playerVelocity;
 	playerControllerReference.move_and_slide();
