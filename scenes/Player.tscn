@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_xkf1r"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m3gel"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vexw4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yx6g4"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m84os"]
 properties/0/path = NodePath(".:position")
@@ -17,11 +17,11 @@ properties/1/replication_mode = 1
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xkf1r")
 
-[node name="PlayerCollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_m3gel")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_vexw4")
+
+[node name="PlayerCollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_yx6g4")
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

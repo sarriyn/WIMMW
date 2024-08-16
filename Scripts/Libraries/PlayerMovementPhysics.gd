@@ -17,7 +17,7 @@ var neck : Node3D;
 # and grabs the PlayerController reference from the parameter
 func _init(playerController : PlayerController) -> void:
 	speed = 7.0;
-	fallAcceleration = 4.5;
+	fallAcceleration = 9.81;
 	targetVelocity = Vector3.ZERO;
 	direction = Vector3.ZERO;
 	gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
@@ -43,8 +43,8 @@ func MoveBackward() -> void:
 
 # Makes the player jump, if they're on a floor
 func Jump() -> void:
-	if is_on_floor():
-		velocity.y = fallAcceleration;
+	if playerControllerReference.is_on_floor():
+		targetVelocity.y = fallAcceleration;
 
 # Normalizes the direction if it's not ZERO
 func DirectionNormalize() -> void:
@@ -57,10 +57,13 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 	targetVelocity.x = direction.x * speed;
 	targetVelocity.z = direction.z * speed;
 	
-	if not is_on_floor():
-		targetVelocity.y = targetVelocity.y - (fallAcceleration * delta);
+	if not playerControllerReference.is_on_floor(): # If player falling, apply gravity
+		targetVelocity.y = targetVelocity.y - (gravity * delta);
 	
 	playerControllerReference.velocity = targetVelocity;
 	playerControllerReference.move_and_slide();
+	
+	if playerControllerReference.is_on_floor(): # If player on the floor, reset targetVelocity on the Y-axis
+		targetVelocity.y = 0;
 	
 	direction = Vector3.ZERO; # This is important, otherwise the player will jitter

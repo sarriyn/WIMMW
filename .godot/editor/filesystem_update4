@@ -5,3 +5,5 @@ res://Scripts/PlayerController.gd
 res://Scenes/main.tscn
 res://Scripts/Libraries/PlayerSpawner.gd
 res://Scripts/Libraries/PlayerCameraMovement.gd
+res://Scripts/Libraries/PlayerMovementPhysics.gd
+res://Scripts/Libraries/PlayerInputChecker.gd

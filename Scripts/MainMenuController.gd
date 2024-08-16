@@ -26,7 +26,6 @@ func SpawnPlayer(id : int = 1) -> void:
 	playerScene = playerSceneReference.instantiate();
 	playerScene.name = str(id);
 	mainScene.get_node("level1").call_deferred("add_child", playerScene);
-	playerScene.position = Vector3(-6, 3, -111);
 
 # Called when the player presses the Singleplayer button in the main menu
 # Spawns the world, and spawns their player
