@@ -15,7 +15,7 @@ func _init(playerController : PlayerController) -> void:
 # It performs the physics depending on what the user pressed
 func InputCheck(delta : float) -> void:
 	if Input.is_action_just_pressed("jump"):
-		playerMovementPhysics.Jump();
+		playerMovementPhysics.Jump(delta);
 	if Input.is_action_pressed("move_right"):
 		playerMovementPhysics.MoveRight();
 	if Input.is_action_pressed("move_left"):
@@ -27,4 +27,3 @@ func InputCheck(delta : float) -> void:
 
 	playerMovementPhysics.DirectionNormalize();
 	playerMovementPhysics.HorizontalAndVerticalVelocityAdjust(delta);
-

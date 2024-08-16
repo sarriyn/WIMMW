@@ -3,9 +3,13 @@ class_name PlayerMovementPhysics;
 
 var playerControllerReference : PlayerController;
 
+var acceleration : float;
+var deceleration : float;
 var speed : float;
 var fallAcceleration : float;
-var targetVelocity : Vector3;
+var airControl : float;
+var playerVelocity : Vector3;
+var jumpVelocity : float;
 var direction : Vector3;
 var gravity : float;
 
@@ -16,9 +20,13 @@ var neck : Node3D;
 # It sets the instance's variables to their defaults,
 # and grabs the PlayerController reference from the parameter
 func _init(playerController : PlayerController) -> void:
-	speed = 7.0;
-	fallAcceleration = 9.81;
-	targetVelocity = Vector3.ZERO;
+	acceleration = 40.0
+	deceleration = 6.0
+	speed = 400.0;
+	fallAcceleration = 4.5;
+	airControl = 0.1
+	jumpVelocity = 10.0
+	playerVelocity = Vector3.ZERO;
 	direction = Vector3.ZERO;
 	gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
 	playerControllerReference = playerController;
@@ -42,28 +50,55 @@ func MoveBackward() -> void:
 	direction.z += 1;
 
 # Makes the player jump, if they're on a floor
-func Jump() -> void:
-	if playerControllerReference.is_on_floor():
-		targetVelocity.y = fallAcceleration;
+func Jump(delta) -> void:
+	print('pre jump')
+	if not playerControllerReference.is_on_floor():
+		playerVelocity.y += gravity * delta
+	else:
+		if playerVelocity.y > 0:
+			playerVelocity.y = 0
+		if Input.is_action_just_pressed("jump"):
+			playerVelocity.y  = jumpVelocity
+	
 
 # Normalizes the direction if it's not ZERO
 func DirectionNormalize() -> void:
 	if direction != Vector3.ZERO:
 		direction = (neck.transform.basis * direction).normalized(); # This makes the player go in the direction the camera is facing
 
-# Makes the PlayerController's velocity to the targetVelocity, after calculations
+# Makes the PlayerController's velocity to the playerVelocity, after calculations
 # Uses the simple move_and_slide() function
 func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
-	targetVelocity.x = direction.x * speed;
-	targetVelocity.z = direction.z * speed;
+	print(delta)
+	var targetVelocity = direction * speed
+	var effectiveDecel = acceleration if direction.length() > 0 else deceleration
+	#playerVelocity.x = direction.x * speed;
+	#playerVelocity.z = direction.z * speed;
 	
-	if not playerControllerReference.is_on_floor(): # If player falling, apply gravity
-		targetVelocity.y = targetVelocity.y - (gravity * delta);
+	if direction != Vector3.ZERO:
+		targetVelocity = direction * speed
+
 	
-	playerControllerReference.velocity = targetVelocity;
+	if playerControllerReference.is_on_floor():
+		print(" is on floor ")
+		playerVelocity.x = lerp(playerVelocity.x, direction.x, delta * effectiveDecel)
+		playerVelocity.z = lerp(playerVelocity.z, direction.z, delta * effectiveDecel)
+	else:
+		playerVelocity.y += gravity * delta
+		print(" is not on floor ")
+		playerVelocity.x = lerp(playerVelocity.x, direction.x, delta * acceleration * airControl)
+		playerVelocity.z = lerp(playerVelocity.z, direction.z, delta * acceleration * airControl)
+	
+	#if playerControllerReference.is_on_floor():
+		#print("is on floor")
+		#playerVelocity.x = direction.x * lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
+		#playerVelocity.z = direction.z * lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
+	#else:
+		#print("not on floor")
+		#playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl);
+		#playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl);
+	
+	playerControllerReference.velocity = playerVelocity;
 	playerControllerReference.move_and_slide();
-	
-	if playerControllerReference.is_on_floor(): # If player on the floor, reset targetVelocity on the Y-axis
-		targetVelocity.y = 0;
 	
 	direction = Vector3.ZERO; # This is important, otherwise the player will jitter

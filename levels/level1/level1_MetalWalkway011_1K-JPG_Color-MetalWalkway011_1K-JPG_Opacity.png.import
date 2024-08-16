@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2y535hmtn8tw"
-path.s3tc="res://.godot/imported/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png-4f8dffb4b1b57b2935d92927bdc38415.s3tc.ctex"
+uid="uid://btse4xagyr5ey"
+path.s3tc="res://.godot/imported/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png-b29b8571c3a0884aa0e9006604c4cde4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "a79ba77a345b4c808fd9fa5fe18a6e7a"
-}
 
 [deps]
 
-source_file="res://Levels/level1/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png"
-dest_files=["res://.godot/imported/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png-4f8dffb4b1b57b2935d92927bdc38415.s3tc.ctex"]
+source_file="res://levels/level1/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png"
+dest_files=["res://.godot/imported/level1_MetalWalkway011_1K-JPG_Color-MetalWalkway011_1K-JPG_Opacity.png-b29b8571c3a0884aa0e9006604c4cde4.s3tc.ctex"]
 
 [params]
 
