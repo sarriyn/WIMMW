@@ -2,3 +2,4 @@ res://Scenes/MainMenu.tscn
 res://Scripts/Libraries/PlayerMovementPhysics.gd
 res://Scenes/Player.tscn
 res://Scenes/main.tscn
+res://Scenes/Main.tscn

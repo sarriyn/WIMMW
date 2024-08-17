@@ -22,10 +22,10 @@ var neck : Node3D;
 func _init(playerController : PlayerController) -> void:
 	acceleration = 3.0
 	deceleration = 8.333
-	speed = 22.0;
+	speed = 12.0;
 	fallAcceleration = 4.5;
 	airControl = 0.1
-	jumpVelocity = 10.0
+	jumpVelocity = 6.666
 	playerVelocity = Vector3.ZERO;
 	direction = Vector3.ZERO;
 	gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
@@ -64,15 +64,15 @@ func DirectionNormalize() -> void:
 
 # Makes the PlayerController's velocity to the playerVelocity, after calculations
 # Uses the simple move_and_slide() function
+# Horizontal and Vertical Velocity Adjustment with Collision Bounce
 func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 	print(delta)
 	var targetVelocity = direction * speed
 	var effectiveDecel = acceleration if direction.length() > 0 else deceleration
-	
+
 	if direction != Vector3.ZERO:
 		targetVelocity = direction * speed
 
-	
 	if playerControllerReference.is_on_floor():
 		print(" is on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
@@ -82,16 +82,23 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		print(" is not on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
-		
+
+	# Handle collisions and apply bounce based on speed
 	if !playerControllerReference.is_on_floor() and playerControllerReference.get_slide_collision_count() > 0:
 		for i in range(playerControllerReference.get_slide_collision_count()):
 			var collision = playerControllerReference.get_slide_collision(i)
-			if collision.get_normal().dot(Vector3.UP) <0.1: # Check if the collision is mostly horizontal
-				playerVelocity.x = playerVelocity.x * 0.04
-				playerVelocity.z = playerVelocity.z * 0.04
+			var collision_normal = collision.get_normal()
+			
+			if collision_normal.dot(Vector3.UP) < 0.1:  # Check if the collision is mostly horizontal
+				var bounce_factor = 1.5  # You can adjust this factor to control how bouncy the collision is
+				var impact_speed = playerVelocity.dot(collision_normal)
+				var bounce_velocity = collision_normal * -impact_speed * bounce_factor
+				
+				playerVelocity.x += bounce_velocity.x
+				playerVelocity.z += bounce_velocity.z
 				break
-	
+
 	playerControllerReference.velocity = playerVelocity;
-	playerControllerReference.move_and_slide();
-	
-	direction = Vector3.ZERO; # This is important, otherwise the player will jitter
+	playerControllerReference.move_and_slide()
+
+	direction = Vector3.ZERO  # This is important, otherwise the player will jitter
