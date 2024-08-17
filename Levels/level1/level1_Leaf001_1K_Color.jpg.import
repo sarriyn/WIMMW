@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u24ojtsroa57"
+uid="uid://ctklwriub4f46"
 path.s3tc="res://.godot/imported/level1_Leaf001_1K_Color.jpg-4ea24ea0e55c9176b3f9204b536572d1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "ac03a214b3b9810f3ad81ec67bf6caff"
 }
 
 [deps]
