@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://krrc1stj2ewv"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuController.gd" id="1_qqs5e"]
+[ext_resource type="PackedScene" uid="uid://wfbkfafvgkcm" path="res://Scenes/Main.tscn" id="2_etcdj"]
+[ext_resource type="PackedScene" uid="uid://ckbd3bkaiuuar" path="res://Scenes/Player.tscn" id="2_o8ha7"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 232.0
+offset_top = 62.0
+offset_right = 232.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qqs5e")
+mainSceneReference = ExtResource("2_etcdj")
+playerSceneReference = ExtResource("2_o8ha7")
+metadata/_edit_group_ = true
+
+[node name="Singleplayer" type="Button" parent="."]
+layout_mode = 1
+offset_right = 103.0
+offset_bottom = 31.0
+text = "Singleplayer"
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 1
+offset_top = 40.0
+offset_right = 44.0
+offset_bottom = 71.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 38.0
+offset_bottom = 111.0
+text = "Join
+"
+
+[node name="Address" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 80.0
+offset_right = 175.0
+offset_bottom = 111.0
+placeholder_text = "IP ADDRESS"
+
+[connection signal="pressed" from="Singleplayer" to="." method="onSingleplayerPressed"]
+[connection signal="pressed" from="Host" to="." method="onHostPressed"]
+[connection signal="pressed" from="Join" to="." method="onJoinPressed"]
