@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://u24ojtsroa57" path="res://Levels/level1/level1_Leaf001_1K_Color.jpg" id="11_f0a2p"]
 [ext_resource type="Texture2D" uid="uid://d68hm5ij0jwk" path="res://Levels/level1/level1_Leaf001_1K_Normal.jpg" id="12_vw4yt"]
 
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4460f"]
 resource_name = "main"
 cull_mode = 2
