@@ -54,7 +54,7 @@ func Jump(delta) -> void:
 	if playerControllerReference.is_on_floor():
 		if playerVelocity.y > 0:
 			playerVelocity.y = 0
-		if Input.is_action_just_pressed("jump"):
+		else:
 			playerVelocity.y  = jumpVelocity
 
 # Normalizes the direction if it's not ZERO
@@ -66,7 +66,6 @@ func DirectionNormalize() -> void:
 # Uses the simple move_and_slide() function
 # Horizontal and Vertical Velocity Adjustment with Collision Bounce
 func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
-	print(delta)
 	var targetVelocity = direction * speed
 	var effectiveDecel = acceleration if direction.length() > 0 else deceleration
 
@@ -74,12 +73,12 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		targetVelocity = direction * speed
 
 	if playerControllerReference.is_on_floor():
-		print(" is on floor ")
+		#print(" is on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
 	else:
 		playerVelocity.y += gravity * delta
-		print(" is not on floor ")
+		#print(" is not on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
 
@@ -91,7 +90,7 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 			
 			if collision_normal.dot(Vector3.UP) < 0.1:  # Check if the collision is mostly horizontal
 				var bounce_factor = 1.5  # You can adjust this factor to control how bouncy the collision is
-				var impact_speed = playerVelocity.dot(collision_normal)
+				var impact_speed = playerVelocity.dot(collision_normal)# .dot returns the dot product
 				var bounce_velocity = collision_normal * -impact_speed * bounce_factor
 				
 				playerVelocity.x += bounce_velocity.x
