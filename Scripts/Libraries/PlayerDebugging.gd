@@ -12,8 +12,10 @@ var playerCameraDirectionFacing : Label;
 var playerCameraDirectionFacingDefaultText : String;
 var playerVelocity : Label;
 var playerVelocityDefaultText : String;
-var frameTime: Label;
+var frameTime : Label;
 var frameTimeDefaultText : String;
+var currentState : Label;
+var currentStateDefaultText : String;
 
 # Constructor that initializes the debug menu values, mostly grabbing Text Labels and other nodes
 func _init(playerController : PlayerController) -> void:
@@ -32,6 +34,8 @@ func _init(playerController : PlayerController) -> void:
 	playerVelocityDefaultText = playerVelocity.text;
 	frameTime = MenuContainer.get_node("FrameTime");
 	frameTimeDefaultText = frameTime.text;
+	currentState = MenuContainer.get_node("CurrentState");
+	currentStateDefaultText = currentState.text;
 	
 	playerControllerReference.add_child(playerUi);
 
@@ -51,3 +55,4 @@ func Tick(delta : float) -> void:
 	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
 	playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
 	frameTime.text = frameTimeDefaultText + str(delta * 1000) + "ms"; # Delta is in seconds, now it's in milliseconds
+	currentState.text = currentStateDefaultText + str(playerControllerReference.playerStateController.GetCurrentState());

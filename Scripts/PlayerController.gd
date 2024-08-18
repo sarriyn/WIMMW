@@ -4,6 +4,7 @@ class_name PlayerController;
 var playerInputChecker : PlayerInputChecker;
 var playerCameraMovement : PlayerCameraMovement;
 var playerDebugging : PlayerDebugging;
+var playerStateController : PlayerStateController;
 
 # Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 	playerInputChecker = PlayerInputChecker.new(self); # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5); # Initialize PlayerCameraMovement and pass self
 	playerDebugging = PlayerDebugging.new(self);
+	playerStateController = PlayerStateController.new(self);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
