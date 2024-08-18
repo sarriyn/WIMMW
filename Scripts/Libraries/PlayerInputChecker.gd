@@ -14,8 +14,10 @@ func _init(playerController : PlayerController) -> void:
 # Checks the user's input for WASD and Space
 # It performs the physics depending on what the user pressed
 func InputCheck(delta : float) -> void:
+	if Input.is_action_just_pressed("debug_menu"):
+		playerControllerReference.playerDebugging.SetVisibility();
 	if Input.is_action_just_pressed("jump"):
-		playerMovementPhysics.Jump(delta);
+		playerMovementPhysics.Jump();
 	if Input.is_action_pressed("move_right"):
 		playerMovementPhysics.MoveRight();
 	if Input.is_action_pressed("move_left"):

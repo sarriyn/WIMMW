@@ -3,6 +3,7 @@ class_name PlayerController;
 
 var playerInputChecker : PlayerInputChecker;
 var playerCameraMovement : PlayerCameraMovement;
+var playerDebugging : PlayerDebugging;
 
 # Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
@@ -14,6 +15,7 @@ func _ready() -> void:
 	self.global_transform.origin = Vector3(-6, 1, -111); # Spawn the player at position (-6, 1, -111)
 	playerInputChecker = PlayerInputChecker.new(self); # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5); # Initialize PlayerCameraMovement and pass self
+	playerDebugging = PlayerDebugging.new(self);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
@@ -24,6 +26,8 @@ func _process(delta : float) -> void:
 func _physics_process(delta : float) -> void:
 	if is_multiplayer_authority():
 		playerInputChecker.InputCheck(delta); # Check player's Input
+	if playerDebugging.GetVisibility(): # Placed here for accuracy of data
+		playerDebugging.Tick();
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.
@@ -32,6 +36,7 @@ func _unhandled_input(event : InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
 	elif event.is_action_pressed("ui_cancel"): # If the ESC button is pressed, make the cursor visible
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
+		#self.get_parent().get_parent().get_parent().visible = true; # This will remain specific to the player (MainMenu)
 
 # Called for every input event, and it allows to handle these
 # events immediately as they occur.

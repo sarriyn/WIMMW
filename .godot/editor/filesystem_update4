@@ -1,0 +1,5 @@
+res://Scenes/DebugMenu.tscn
+res://Scripts/Libraries/PlayerDebugging.gd
+res://Scenes/MainMenu.tscn
+res://Scenes/Main.tscn
+res://Scenes/Player.tscn
