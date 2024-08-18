@@ -19,14 +19,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
-	if playerDebugging.GetVisibility():
-		playerDebugging.Tick();
+	pass;
 
 # Called before all the physics calculations
 # NOTE: Capped at 60 FPS
 func _physics_process(delta : float) -> void:
 	if is_multiplayer_authority():
 		playerInputChecker.InputCheck(delta); # Check player's Input
+	if playerDebugging.GetVisibility(): # Placed here for accuracy of data
+		playerDebugging.Tick();
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.

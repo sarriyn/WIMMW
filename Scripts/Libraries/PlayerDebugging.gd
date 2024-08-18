@@ -43,7 +43,7 @@ func SetPlayerCameraDirectionFacing() -> void:
 	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(GetPlayerCameraDirectionFacing());
 
 func GetPlayerCameraDirectionFacing() -> Vector3:
-	return playerControllerReference.get_node("Neck").get_node("Camera3D").transform.basis.z.normalized();
+	return -playerControllerReference.get_node("Neck").get_node("Camera3D").transform.basis.z.normalized();
 
 func SetPlayerVelocity() -> void:
 	playerVelocity.text = playerVelocityDefaultText + str(GetPlayerVelocity());
