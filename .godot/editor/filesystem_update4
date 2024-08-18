@@ -1,6 +1,6 @@
-res://Scenes/DebugMenu.tscn
-res://Scripts/Libraries/PlayerDebugging.gd
 res://Scenes/MainMenu.tscn
+res://Scenes/DebugMenu.tscn
 res://Scenes/Main.tscn
 res://Scenes/Player.tscn
+res://Scripts/Libraries/PlayerDebugging.gd
 res://Scripts/PlayerController.gd

@@ -50,4 +50,4 @@ func Tick(delta : float) -> void:
 	playerCoordinates.text = playerCoordinatesDefaultText + str(playerControllerReference.global_transform.origin);
 	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
 	playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
-	frameTime.text = frameTimeDefaultText + str(delta);
+	frameTime.text = frameTimeDefaultText + str(delta * 1000) + "ms"; # Delta is in seconds, now it's in milliseconds
