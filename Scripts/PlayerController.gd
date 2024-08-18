@@ -27,7 +27,7 @@ func _physics_process(delta : float) -> void:
 	if is_multiplayer_authority():
 		playerInputChecker.InputCheck(delta); # Check player's Input
 	if playerDebugging.GetVisibility(): # Placed here for accuracy of data
-		playerDebugging.Tick();
+		playerDebugging.Tick(delta);
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.
