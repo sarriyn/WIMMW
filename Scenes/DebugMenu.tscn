@@ -28,3 +28,7 @@ text = "Player Camera Direction Facing: "
 [node name="PlayerVelocity" type="Label" parent="MenuContainer"]
 layout_mode = 2
 text = "Player Velocity:"
+
+[node name="FrameTime" type="Label" parent="MenuContainer"]
+layout_mode = 2
+text = "Frame Time: "

@@ -12,6 +12,8 @@ var playerCameraDirectionFacing : Label;
 var playerCameraDirectionFacingDefaultText : String;
 var playerVelocity : Label;
 var playerVelocityDefaultText : String;
+var frameTime: Label;
+var frameTimeDefaultText : String;
 
 # Constructor that initializes the debug menu values, mostly grabbing Text Labels and other nodes
 func _init(playerController : PlayerController) -> void:
@@ -28,6 +30,9 @@ func _init(playerController : PlayerController) -> void:
 	playerCameraDirectionFacingDefaultText = playerCameraDirectionFacing.text;
 	playerVelocity = MenuContainer.get_node("PlayerVelocity");
 	playerVelocityDefaultText = playerVelocity.text;
+	frameTime = MenuContainer.get_node("FrameTime");
+	frameTimeDefaultText = frameTime.text;
+	
 	playerControllerReference.add_child(playerUi);
 
 # Sets the visibility of the debug menu
@@ -40,8 +45,9 @@ func GetVisibility() -> bool:
 	return playerUi.visible;
 
 # Tasks to perform each tick
-func Tick() -> void:
+func Tick(delta : float) -> void:
 	fps.text = fpsDefaultText + str(Engine.get_frames_per_second());
 	playerCoordinates.text = playerCoordinatesDefaultText + str(playerControllerReference.global_transform.origin);
 	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
 	playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
+	frameTime.text = frameTimeDefaultText + str(delta);

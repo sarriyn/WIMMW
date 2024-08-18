@@ -3,3 +3,4 @@ res://Scripts/Libraries/PlayerDebugging.gd
 res://Scenes/MainMenu.tscn
 res://Scenes/Main.tscn
 res://Scenes/Player.tscn
+res://Scripts/PlayerController.gd
