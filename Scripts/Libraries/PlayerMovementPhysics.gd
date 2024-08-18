@@ -50,7 +50,7 @@ func MoveBackward() -> void:
 	direction.z += 1;
 
 # Makes the player jump, if they're on a floor
-func Jump(delta) -> void:
+func Jump() -> void:
 	if playerControllerReference.is_on_floor():
 		if playerVelocity.y > 0:
 			playerVelocity.y = 0
