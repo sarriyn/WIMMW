@@ -2,6 +2,7 @@ extends Node;
 class_name PlayerDebugging;
 
 var playerControllerReference : PlayerController;
+var playerCamera : Camera3D;
 var playerUi : Control;
 var fps : Label;
 var fpsDefaultText : String
@@ -12,8 +13,10 @@ var playerCameraDirectionFacingDefaultText : String;
 var playerVelocity : Label;
 var playerVelocityDefaultText : String;
 
+# Constructor that initializes the debug menu values, mostly grabbing Text Labels and other nodes
 func _init(playerController : PlayerController) -> void:
 	playerControllerReference = playerController;
+	playerCamera = playerControllerReference.get_node("Neck").get_node("Camera3D"); # Cache it for efficiency
 	playerUi = preload("res://Scenes/DebugMenu.tscn").instantiate();
 	playerUi.visible = false;
 	var MenuContainer = playerUi.get_node("MenuContainer");
@@ -25,40 +28,20 @@ func _init(playerController : PlayerController) -> void:
 	playerCameraDirectionFacingDefaultText = playerCameraDirectionFacing.text;
 	playerVelocity = MenuContainer.get_node("PlayerVelocity");
 	playerVelocityDefaultText = playerVelocity.text;
-	playerControllerReference.call_deferred("add_child", playerUi);
+	playerControllerReference.add_child(playerUi);
 
-func SetFps() -> void:
-	fps.text = fpsDefaultText + str(GetFps());
-
-func GetFps() -> float:
-	return Engine.get_frames_per_second();
-
-func SetPlayerGlobalCoordinates() -> void:
-	playerCoordinates.text = playerCoordinatesDefaultText + str(GetPlayerGlobalCoordinates());
-
-func GetPlayerGlobalCoordinates() -> Vector3:
-	return playerControllerReference.global_transform.origin;
-
-func SetPlayerCameraDirectionFacing() -> void:
-	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(GetPlayerCameraDirectionFacing());
-
-func GetPlayerCameraDirectionFacing() -> Vector3:
-	return -playerControllerReference.get_node("Neck").get_node("Camera3D").transform.basis.z.normalized();
-
-func SetPlayerVelocity() -> void:
-	playerVelocity.text = playerVelocityDefaultText + str(GetPlayerVelocity());
-
-func GetPlayerVelocity() -> Vector3:
-	return playerControllerReference.velocity;
-
+# Sets the visibility of the debug menu
+# If true then false, if false then true
 func SetVisibility() -> void:
 	playerUi.visible = !playerUi.visible;
 
+# Get whether or not the debug menu is visible
 func GetVisibility() -> bool:
 	return playerUi.visible;
 
+# Tasks to perform each tick
 func Tick() -> void:
-	SetFps();
-	SetPlayerCameraDirectionFacing();
-	SetPlayerGlobalCoordinates();
-	SetPlayerVelocity();
+	fps.text = fpsDefaultText + str(Engine.get_frames_per_second());
+	playerCoordinates.text = playerCoordinatesDefaultText + str(playerControllerReference.global_transform.origin);
+	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
+	playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
