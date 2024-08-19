@@ -5,17 +5,17 @@ func _to_string() -> String:
 	return "";
 
 func Enter() -> void:
-	print("TestEnter");
+	#print("TestEnter");
 	pass;
 
 func Exit() -> void:
-	print("TestExit");
+	#print("TestExit");
 	pass;
 
 func Update(_delta : float) -> void:
-	print("TestUpdate");
+	#print("TestUpdate");
 	pass;
 
 func PhysicsUpdate(_delta : float) -> void:
-	print("TestPhysicsUpdate");
+	#print("TestPhysicsUpdate");
 	pass;
