@@ -5,9 +5,6 @@ var playerControllerReference : PlayerController;
 var states : Dictionary;
 var currentState : State;
 
-func _process(delta):
-	currentState.Update(delta);
-
 func _init(playerController : PlayerController):
 	playerControllerReference = playerController;
 	
@@ -29,3 +26,6 @@ func GetState(stateName : String) -> State:
 
 func GetCurrentState() -> State:
 	return currentState;
+
+func UpdateState() -> void:
+	currentState.Update();

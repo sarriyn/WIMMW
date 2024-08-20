@@ -13,15 +13,17 @@ func _enter_tree() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_process(false); # Stop from _process being called while Player is initalizing
 	self.global_transform.origin = Vector3(-6, 1, -111); # Spawn the player at position (-6, 1, -111)
 	playerInputChecker = PlayerInputChecker.new(self); # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5); # Initialize PlayerCameraMovement and pass self
 	playerDebugging = PlayerDebugging.new(self);
 	playerStateController = PlayerStateController.new(self);
+	set_process(true); # Begin _process being called, initializing finished
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
-	playerStateController.currentState.StateLogic()
+	playerStateController.UpdateState();
 	pass;
 
 # Called before all the physics calculations
