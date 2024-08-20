@@ -2,7 +2,7 @@ extends Node;
 class_name State;
 
 var playerControllerReference : PlayerController;
-var threshold : float;
+var threshold : float = 0.7;
 var playerStateController : PlayerStateController;
 
 func Enter() -> void:

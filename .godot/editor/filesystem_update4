@@ -1,11 +1,4 @@
 res://Scenes/Player.tscn
-res://Scripts/States/IdleState.gd
 res://Scripts/States/State.gd
+res://Scripts/States/IdleState.gd
 res://Scripts/States/WalkingState.gd
-res://Scenes/MainMenu.tscn
-res://Scripts/PlayerController.gd
-res://Scripts/PlayerStateController.gd
-res://Scenes/DebugMenu.tscn
-res://Scenes/Main.tscn
-res://Scripts/StateController.gd
-res://Scripts/Libraries/StateOrganizer.gd

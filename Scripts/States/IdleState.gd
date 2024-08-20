@@ -7,7 +7,6 @@ func _init(pCR : PlayerController, pSC : PlayerStateController) -> void:
 	playerControllerReference = pCR
 	playerStateController = pSC
 	isIdle = true;
-	threshold = 0.7;
 
 func _to_string() -> String:
 	return "IdleState";

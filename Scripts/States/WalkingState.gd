@@ -10,7 +10,6 @@ func _init(pCR : PlayerController, pSC : PlayerStateController) -> void:
 	playerControllerReference = pCR;
 	playerStateController = pSC;
 	isWalking = false;
-	threshold = 0.7;
 
 func SetState() -> void:
 	isWalking = !isWalking;
