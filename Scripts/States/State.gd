@@ -12,13 +12,15 @@ func Exit() -> void:
 	pass;
 
 func Update() -> void:
-	var playerVelocity = playerControllerReference.velocity
-	print(absf(playerVelocity.x + playerVelocity.z), " walking")
+	var playerVelocity = playerControllerReference.velocity;
+	print(absf(playerVelocity.x + playerVelocity.z), " walking");
 	if playerControllerReference.is_on_floor():
 		if absf(playerVelocity.x + playerVelocity.z) >= threshold: #takes the velocity.x and .z of the player and returns a positive value for comparrison of the threshold of what is considered "moving"
-			playerStateController.ChangeState("WalkingState") #changes the player state
+			playerStateController.ChangeState("WalkingState"); #changes the player state
+			var anime = playerControllerReference.get_node("Neck/SAS/AnimationPlayer");
+			anime.play("ArmatureAction", 0.5);
 		else:
-			playerStateController.ChangeState("IdleState")
+			playerStateController.ChangeState("IdleState");
 
 func PhysicsUpdate(_delta : float) -> void:
 	pass;
