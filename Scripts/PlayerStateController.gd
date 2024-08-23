@@ -10,16 +10,17 @@ func _init(playerController : PlayerController):
 	
 	states = {
 		"IdleState" = IdleState.new(playerControllerReference, self),
-		"WalkingState" = WalkingState.new(playerControllerReference, self)
+		"WalkingState" = WalkingState.new(playerControllerReference, self),
+		"FallingState" = FallingState.new(playerControllerReference, self)
 	};
 	
 	currentState = states["IdleState"];
 
 func ChangeState(newStateName : String) -> void:
-	if GetState(newStateName):
-		currentState.Exit();
+	#if GetState(newStateName):
+	#	currentState.Exit();
 	currentState = states[newStateName];
-	currentState.Enter();
+	#currentState.Enter();
 
 func GetState(stateName : String) -> State:
 	return states[stateName];

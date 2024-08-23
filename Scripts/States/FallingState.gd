@@ -1,28 +1,26 @@
 extends State;
-class_name IdleState;
+class_name FallingState;
 
-var isIdle : bool;
-
+var isFalling : bool;
 
 func _init(pCR : PlayerController, pSC : PlayerStateController) -> void:
-	playerControllerReference = pCR
-	playerStateController = pSC
-	isIdle = true;
+	playerControllerReference = pCR;
+	playerStateController = pSC;
+	isFalling = false;
 	anime = playerControllerReference.get_node("Neck/SAS/AnimationPlayer");
 	playerVelocity = playerControllerReference.velocity;
 
 func _to_string() -> String:
-	return "IdleState";
+	return "FallingState";
 
 func SetState() -> void:
-	isIdle = !isIdle;
+	isFalling = !isFalling;
 
 func GetState() -> bool:
-	return isIdle;
-
+	return isFalling;
+	
 #func Update() -> void:
 	#super.Update()
-	#anime.play("idle", -1, 2.0, false);
-	#print("idle UPDATE")
-	#anime.play("idle");
-	
+	#anime.play("falling", -1, 2.0, false);
+	#print("Falling UPDATE")
+	#anime.play("falling");

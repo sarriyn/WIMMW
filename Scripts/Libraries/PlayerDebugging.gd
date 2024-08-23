@@ -36,7 +36,6 @@ func _init(playerController : PlayerController) -> void:
 	frameTimeDefaultText = frameTime.text;
 	currentState = MenuContainer.get_node("CurrentState");
 	currentStateDefaultText = currentState.text;
-	
 	playerControllerReference.add_child(playerUi);
 
 # Sets the visibility of the debug menu
