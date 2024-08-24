@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dty1ubrwswhfs" path="res://Levels/level1/level1_SheetMetal002_1K-JPG_Metalness-SheetMetal002_1K-JPG_Roughness.png" id="8_iyn6j"]
 [ext_resource type="Texture2D" uid="uid://dselasanoirw6" path="res://Levels/level1/level1_col.png" id="9_c77kp"]
 [ext_resource type="Texture2D" uid="uid://cutiqq88qgwur" path="res://Levels/level1/level1_okdmY_4K_Albedo.jpg" id="10_eailu"]
-[ext_resource type="Texture2D" uid="uid://ctklwriub4f46" path="res://Levels/level1/level1_Leaf001_1K_Color.jpg" id="11_f0a2p"]
+[ext_resource type="Texture2D" uid="uid://5l87qkrp3tn0" path="res://Levels/level1/level1_Leaf001_1K_Color.jpg" id="11_f0a2p"]
 [ext_resource type="Texture2D" uid="uid://d68hm5ij0jwk" path="res://Levels/level1/level1_Leaf001_1K_Normal.jpg" id="12_vw4yt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4460f"]

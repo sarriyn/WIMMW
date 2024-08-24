@@ -73,12 +73,10 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		targetVelocity = direction * speed
 
 	if playerControllerReference.is_on_floor():
-		#print(" is on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
 	else:
 		playerVelocity.y += gravity * delta
-		#print(" is not on floor ")
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
 
