@@ -50,4 +50,9 @@ debug_menu={
 
 [physics]
 
+3d/physics_engine="JoltPhysics3D"
 3d/default_gravity=-9.8
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=4

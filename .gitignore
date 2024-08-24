@@ -4,6 +4,8 @@
 /Entities/
 /.godot/
 /addons/
+/.tmp.driveupload/
+/.tmp.drivedownload/
 
 # Godot-specific ignores
 .import/
