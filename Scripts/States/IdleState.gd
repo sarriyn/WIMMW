@@ -19,10 +19,3 @@ func SetState() -> void:
 
 func GetState() -> bool:
 	return isIdle;
-
-#func Update() -> void:
-	#super.Update()
-	#anime.play("idle", -1, 2.0, false);
-	#print("idle UPDATE")
-	#anime.play("idle");
-	

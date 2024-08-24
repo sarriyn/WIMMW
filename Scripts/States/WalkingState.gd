@@ -18,9 +18,3 @@ func SetState() -> void:
 
 func GetState() -> bool:
 	return isWalking;
-
-#func Update() -> void:
-	#super.Update()
-	#anime.play("walk", -1, 2.0, false);
-	#print("walking UPDATE")
-	#anime.play("walk");

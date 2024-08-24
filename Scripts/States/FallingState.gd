@@ -18,9 +18,3 @@ func SetState() -> void:
 
 func GetState() -> bool:
 	return isFalling;
-	
-#func Update() -> void:
-	#super.Update()
-	#anime.play("falling", -1, 2.0, false);
-	#print("Falling UPDATE")
-	#anime.play("falling");

@@ -14,10 +14,6 @@ func Exit() -> void:
 	pass;
 
 func Update() -> void:
-	#print(absf(playerVelocity.x + playerVelocity.z), " walking");
-	
-	#print(playerStateController)
-	#print(playerControllerReference);
 	if playerStateController.currentState is IdleState:
 		# If in IdleState, play the "idle" animation, but also from here
 		# It's possible to begin walking
