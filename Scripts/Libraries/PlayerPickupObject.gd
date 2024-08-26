@@ -30,11 +30,15 @@ func RemoveObject() -> void:
 		pickedObject = null;
 
 func PickedObjectMove() -> void:
+	
 	print(pickedObject.position.y)
 	if pickedObject != null:
-		print("pickedObjectMove")
+
 		var a = pickedObject.global_transform.origin
 		var b = hand.global_transform.origin
+		var distanceVector = b - a 
+		var distance = distanceVector.length()
+
 		pickedObject.set_linear_velocity((b-a)*pullPower)#moves the cube around
-		if abs((a + b)) > abs(Vector3(5, 5, 5)):#checks if the objects is far away from that hand 
+		if distance > 5.0:#checks if the pickedObject is more that 5 units away
 			pickedObject = null; #releases the object if it's out of range
