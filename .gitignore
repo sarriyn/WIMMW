@@ -6,6 +6,7 @@
 /addons/
 /.tmp.driveupload/
 /.tmp.drivedownload/
+/PhysicsObjects/
 
 # Godot-specific ignores
 .import/

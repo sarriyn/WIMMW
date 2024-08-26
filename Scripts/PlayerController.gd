@@ -7,6 +7,7 @@ var playerDebugging : PlayerDebugging
 var playerStateController : PlayerStateController
 var playerRPCSynchronizer : PlayerRPCSynchronizer
 var smoothModelInterpolation : SmoothModelInterpolation
+var playerPickupObject : PlayerPickupObject
 
 # Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
@@ -20,12 +21,14 @@ func is_local_player() -> bool:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process(false) # Stop from _process being called while Player is initializing
-	self.global_transform.origin = Vector3(-6, 1, -111) # Spawn the player at position (-6, 1, -111)
+	self.global_transform.origin = Vector3(30, 1, 0) # Spawn the player at position (-6, 1, -111)
+	playerPickupObject = PlayerPickupObject.new(self)
 	playerInputChecker = PlayerInputChecker.new(self) # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5) # Initialize PlayerCameraMovement and pass self
 	playerDebugging = PlayerDebugging.new(self)
 	playerStateController = PlayerStateController.new(self)
 	smoothModelInterpolation = SmoothModelInterpolation.new(self)
+
 	
 	var robotic_fps_rig = get_node("Neck/Camera3D/roboticFPSRig") # Reference to the first-person arm rig
 	var third_person_mesh = get_node("Neck/SAS/Armature/Skeleton3D/Cylinder_001") # Reference to the third-person mesh (Cylinder_001)
@@ -56,6 +59,9 @@ func _physics_process(delta : float) -> void:
 			playerDebugging.Tick(delta)
 	playerStateController.UpdateState()
 	smoothModelInterpolation.smoothModelInterpolationProcess(delta)
+	if playerPickupObject.pickedObject != null: 
+		playerPickupObject.PickedObjectMove()
+		
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.
