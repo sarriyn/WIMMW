@@ -15,7 +15,6 @@ var gravity : float;
 
 var camera : Camera3D;
 var neck : Node3D;
-var flashLight : SpotLight3D;
 
 # PlayerMovementPhysics constructor
 # It sets the instance's variables to their defaults,
@@ -33,8 +32,6 @@ func _init(playerController : PlayerController) -> void:
 	playerControllerReference = playerController;
 	neck = playerControllerReference.get_node("Neck");
 	camera = neck.get_node("Camera3D");
-	flashLight = playerController.get_node("Neck/Camera3D/flashlight")
-	flashLight.visible = false
 
 # Moves the player to the right
 func MoveRight() -> void:
@@ -51,10 +48,6 @@ func MoveForward() -> void:
 # Moves the player backward
 func MoveBackward() -> void:
 	direction.z += 1;
-
-func ToggleFlashLight() -> void:
-	flashLight.visible = !flashLight.visible
-	
 
 # Makes the player jump, if they're on a floor
 func Jump() -> void:
