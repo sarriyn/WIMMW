@@ -5,17 +5,16 @@ var playerInputChecker : PlayerInputChecker
 var playerCameraMovement : PlayerCameraMovement
 var playerDebugging : PlayerDebugging
 var playerStateController : PlayerStateController
-var playerRPCSynchronizer : PlayerRPCSynchronizer
 var smoothModelInterpolation : SmoothModelInterpolation
 var playerPickupObject : PlayerPickupObject
 
 # Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int()) # Set multiplayer authority for this specific game instance
-	$Neck/Camera3D.current = is_local_player() # Set the camera current if this is the local player
+	$Neck/Camera3D.current = IsLocalPlayer() # Set the camera current if this is the local player
 
 # Method to determine if this is the local player
-func is_local_player() -> bool:
+func IsLocalPlayer() -> bool:
 	return multiplayer.get_unique_id() == name.to_int()
 
 # Called when the node enters the scene tree for the first time.
@@ -34,7 +33,7 @@ func _ready() -> void:
 	var battery_chamber_l = get_node("Neck/SAS/Armature/Skeleton3D/battery chamber low") # Reference to the left battery chamber
 
 	# Local player-specific setup
-	if is_local_player():
+	if IsLocalPlayer():
 		robotic_fps_rig.visible = true # Ensure the first-person arms are visible to the local player
 		third_person_mesh.visible = false # Hide the third-person mesh from the local player
 		battery_chamber_l.visible = false # Hide the left battery chamber from the local player
@@ -52,7 +51,7 @@ func _process(delta : float) -> void:
 # Called before all the physics calculations
 # NOTE: Capped at 60 FPS
 func _physics_process(delta : float) -> void:
-	if is_local_player():
+	if IsLocalPlayer():
 		playerInputChecker.InputCheck(delta) # Check player's Input
 		playerDebugging.Tick(delta) # Sync player debug menu to physics process
 	playerStateController.UpdateState()

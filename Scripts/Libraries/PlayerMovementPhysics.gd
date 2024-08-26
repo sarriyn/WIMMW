@@ -1,17 +1,20 @@
 extends CharacterBody3D;
 class_name PlayerMovementPhysics;
 
+const speed : float = 12.0;
+const acceleration : float = 3.0;
+const deceleration : float = 8.333;
+const fallAcceleration : float = 4.5;
+const airControl : float = 0.1 ;
+const jumpVelocity : float = 6.666;
+const gravity : float = 9.8; 
+# Can't grab from ProjectSettings.get_setting("physics/3d/default_gravity") as it is not known at runtime
+# But keeping this comment in case we ever want to be grabbing something from ProjectSettings
+
 var playerControllerReference : PlayerController;
 
-var acceleration : float;
-var deceleration : float;
-var speed : float;
-var fallAcceleration : float;
-var airControl : float;
 var playerVelocity : Vector3;
-var jumpVelocity : float;
 var direction : Vector3;
-var gravity : float;
 
 var camera : Camera3D;
 var neck : Node3D;
@@ -20,16 +23,9 @@ var neck : Node3D;
 # It sets the instance's variables to their defaults,
 # and grabs the PlayerController reference from the parameter
 func _init(playerController : PlayerController) -> void:
-	acceleration = 3.0
-	deceleration = 8.333
-	speed = 12.0;
-	fallAcceleration = 4.5;
-	airControl = 0.1
-	jumpVelocity = 6.666
+	playerControllerReference = playerController;
 	playerVelocity = Vector3.ZERO;
 	direction = Vector3.ZERO;
-	gravity = ProjectSettings.get_setting("physics/3d/default_gravity");
-	playerControllerReference = playerController;
 	neck = playerControllerReference.get_node("Neck");
 	camera = neck.get_node("Camera3D");
 

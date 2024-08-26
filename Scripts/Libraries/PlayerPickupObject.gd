@@ -1,11 +1,12 @@
 extends CharacterBody3D;
 class_name PlayerPickupObject;
 
+const pullPower : float = 7.0;
+
 var interaction : RayCast3D;
 var hand : Marker3D;
 var pickedObject : RigidBody3D;
 # var activeObject : bool; # Tells physics when to run PickedObjectMove() //optimization//
-var pullPower : float;
 
 var playerControllerReference : PlayerController;
 
@@ -16,7 +17,6 @@ func _init(playerController : PlayerController) -> void:
 	interaction.add_exception(playerControllerReference); # Add exception to the player's collision body
 	pickedObject = null
 	# activeObject = false
-	pullPower = 7.0
 	
 func PickObject() -> void:
 	var collider = interaction.get_collider()

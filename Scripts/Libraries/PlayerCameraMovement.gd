@@ -1,11 +1,12 @@
 extends CharacterBody3D;
 class_name PlayerCameraMovement;
 
+const min_pitch : float = -90.0;
+const max_pitch : float = 90.0;
+
 var playerControllerReference : PlayerController;
 
 var mouseSensitivity : float;
-var min_pitch : float;
-var max_pitch : float;
 var yaw : float;
 var pitch : float;
 
@@ -17,8 +18,6 @@ var neck : Node3D;
 func _init(playerController : PlayerController, mouseSensitivityDefault : float = 0.1) -> void:
 	playerControllerReference = playerController; # Grab reference to PlayerController (attached to Player node)
 	mouseSensitivity = mouseSensitivityDefault;
-	min_pitch = -90.0;
-	max_pitch = 90.0;
 	yaw = 0.0;
 	pitch = 0.0;
 	neck = playerControllerReference.get_node("Neck");

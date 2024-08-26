@@ -1,6 +1,15 @@
 extends Node3D
 class_name SmoothModelInterpolation
 
+# Euler Camera Smoothing
+const smoothingFactor : float = 0.1;
+# Position
+const swaySpeed : float = 5.0;
+const swayAmount : Vector3 = Vector3(0.05, 0.1, 0.05);
+# Rotation
+const swayIntensityLook : Vector3 = Vector3(0.1, 0.1, 0.1);
+const rVec : float = 3.0;
+
 var playerControllerReference : PlayerController
 
 var lerpPoint : Node3D
@@ -9,32 +18,21 @@ var roboticFPSRig : Node3D
 # Euler Camera Smoothing
 var lastLerpRotation : Vector3
 var smoothedCameraRotationDelta : Vector3
-var smoothingFactor : float
-# Position
-var swayAmount : Vector3
-var swaySpeed : float
 # Rotation
-var swayIntensityLook : Vector3
 var lastMousePosition : Vector2
 var mouseDelta : Vector2
 var lerpOriginalPosition : Vector3
-var rVec : float
 
 func _init(playerController : PlayerController):
+	playerControllerReference = playerController
 	lerpPoint = playerController.get_node("Neck/Camera3D/lerpPoint")
 	roboticFPSRig = playerController.get_node("Neck/Camera3D/roboticFPSRig")
+	lerpOriginalPosition = lerpPoint.position
+	lastLerpRotation = lerpPoint.global_transform.basis.get_euler()
 	
 	lastLerpRotation = Vector3.ZERO
 	smoothedCameraRotationDelta = Vector3.ZERO
-	smoothingFactor = 0.1
-	swayAmount = Vector3(0.05, 0.1, 0.05)
-	swaySpeed = 5.0
-	swayIntensityLook = Vector3(0.1, 0.1, 0.1)
-	lastMousePosition = Vector2()
-	rVec = 3.0
-	playerControllerReference = playerController
-	lerpOriginalPosition = lerpPoint.position
-	lastLerpRotation = lerpPoint.global_transform.basis.get_euler()
+	lastMousePosition = Vector2(0, 0)
 	
 func GetMovementInputVector() -> Vector3:
 	# Weapon/hands movement based on velocity of the player

@@ -1,5 +1,6 @@
 extends Node;
 class_name PlayerRPCSynchronizer;
+# THIS CLASS IS CURRENTLY NOT USED, BUT CAN REMAIN IF WE NEED TO EVER USE IT
 
 var playerController : PlayerController;
 var playerStateController : PlayerStateController;
