@@ -7,6 +7,7 @@ var playerDebugging : PlayerDebugging
 var playerStateController : PlayerStateController
 var playerRPCSynchronizer : PlayerRPCSynchronizer
 var smoothModelInterpolation : SmoothModelInterpolation
+var playerPickupObject : PlayerPickupObject
 
 # Called when the node enters the scene tree, but does not wait for the children to also enter
 func _enter_tree() -> void:
@@ -20,13 +21,14 @@ func is_local_player() -> bool:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process(false) # Stop from _process being called while Player is initializing
-	self.global_transform.origin = Vector3(-6, 1, -111) # Spawn the player at position (-6, 1, -111)
-	playerInputChecker = PlayerInputChecker.new(self) # Initialize PlayerInputChecker and pass self
+	self.global_transform.origin = Vector3(30, 1, 0) # Spawn the player at position (-6, 1, -111)
+	playerPickupObject = PlayerPickupObject.new(self)
+	playerInputChecker = PlayerInputChecker.new(self, playerPickupObject) # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5) # Initialize PlayerCameraMovement and pass self
 	playerDebugging = PlayerDebugging.new(self)
 	playerStateController = PlayerStateController.new(self)
 	smoothModelInterpolation = SmoothModelInterpolation.new(self)
-	
+
 	var robotic_fps_rig = get_node("Neck/Camera3D/roboticFPSRig") # Reference to the first-person arm rig
 	var third_person_mesh = get_node("Neck/SAS/Armature/Skeleton3D/Cylinder_001") # Reference to the third-person mesh (Cylinder_001)
 	var battery_chamber_l = get_node("Neck/SAS/Armature/Skeleton3D/battery chamber low") # Reference to the left battery chamber
@@ -52,10 +54,10 @@ func _process(delta : float) -> void:
 func _physics_process(delta : float) -> void:
 	if is_local_player():
 		playerInputChecker.InputCheck(delta) # Check player's Input
-		if playerDebugging.GetVisibility(): # Placed here for accuracy of data
-			playerDebugging.Tick(delta)
+		playerDebugging.Tick(delta) # Sync player debug menu to physics process
 	playerStateController.UpdateState()
 	smoothModelInterpolation.smoothModelInterpolationProcess(delta)
+	playerPickupObject.PickedObjectMove()
 
 # Called for input events that were not consumed or handled
 # by any nodes in the scene tree or by the UI system.

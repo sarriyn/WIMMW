@@ -49,9 +49,10 @@ func GetVisibility() -> bool:
 
 # Tasks to perform each tick
 func Tick(delta : float) -> void:
-	fps.text = fpsDefaultText + str(Engine.get_frames_per_second());
-	playerCoordinates.text = playerCoordinatesDefaultText + str(playerControllerReference.global_transform.origin);
-	playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
-	playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
-	frameTime.text = frameTimeDefaultText + str(delta * 1000) + "ms"; # Delta is in seconds, now it's in milliseconds
-	currentState.text = currentStateDefaultText + str(playerControllerReference.playerStateController.GetCurrentState());
+	if GetVisibility():
+		fps.text = fpsDefaultText + str(Engine.get_frames_per_second());
+		playerCoordinates.text = playerCoordinatesDefaultText + str(playerControllerReference.global_transform.origin);
+		playerCameraDirectionFacing.text = playerCameraDirectionFacingDefaultText + str(-playerCamera.transform.basis.z.normalized());
+		playerVelocity.text = playerVelocityDefaultText + str(playerControllerReference.velocity);
+		frameTime.text = frameTimeDefaultText + str(delta * 1000) + "ms"; # Delta is in seconds, now it's in milliseconds
+		currentState.text = currentStateDefaultText + str(playerControllerReference.playerStateController.GetCurrentState());

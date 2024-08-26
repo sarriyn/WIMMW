@@ -76,7 +76,7 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
 	else:
-		playerVelocity.y += gravity * delta
+		playerVelocity.y += -gravity * delta
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
 
