@@ -12,6 +12,7 @@ var pitch : float;
 
 var camera : Camera3D;
 var neck : Node3D;
+var tabCam : Camera3D;
 
 # PlayerCameraMovement constructor
 # It sets the default values and grabs the PlayerController reference
@@ -22,6 +23,7 @@ func _init(playerController : PlayerController, mouseSensitivityDefault : float 
 	pitch = 0.0;
 	neck = playerControllerReference.get_node("Neck");
 	camera = neck.get_node("Camera3D");
+	tabCam = neck.get_node("tabCam");
 
 # Performs camera movement for the player
 func CameraMovement(event : InputEvent) -> void:
@@ -32,3 +34,14 @@ func CameraMovement(event : InputEvent) -> void:
 
 	neck.rotation_degrees.y = yaw;
 	camera.rotation_degrees.x = pitch;
+	
+func TabMenu() -> void:
+	if tabCam.current:
+		playerControllerReference.get_node("Neck/Camera3D/roboticFPSRig").visible = true # Ensure the first-person arms are visible to the local player
+		playerControllerReference.get_node("Neck/SAS/Armature/Skeleton3D/Cylinder_001").visible = false # Hide the third-person mesh from the local player
+		playerControllerReference.get_node("Neck/SAS/Armature/Skeleton3D/battery chamber low").visible = false # Hide the left battery chamber from the local player
+	else:
+		playerControllerReference.get_node("Neck/Camera3D/roboticFPSRig").visible = false # Ensure the first-person arms are visible to the local player
+		playerControllerReference.get_node("Neck/SAS/Armature/Skeleton3D/Cylinder_001").visible = true # Hide the third-person mesh from the local player
+		playerControllerReference.get_node("Neck/SAS/Armature/Skeleton3D/battery chamber low").visible = true # Hide the left battery chamber from the local player
+	tabCam.current = !tabCam.current

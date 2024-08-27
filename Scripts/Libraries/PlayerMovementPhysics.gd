@@ -67,7 +67,6 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 
 	if direction != Vector3.ZERO:
 		targetVelocity = direction * speed
-
 	if playerControllerReference.is_on_floor():
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)
@@ -75,6 +74,7 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 		playerVelocity.y += -gravity * delta
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * acceleration * airControl)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * acceleration * airControl)
+	print(playerVelocity.y)
 
 	# Handle collisions and apply bounce based on speed
 	if !playerControllerReference.is_on_floor() and playerControllerReference.get_slide_collision_count() > 0:

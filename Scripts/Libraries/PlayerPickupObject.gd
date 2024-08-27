@@ -1,7 +1,7 @@
 extends CharacterBody3D;
 class_name PlayerPickupObject;
 
-const pullPower : float = 7.0;
+const pullPower : float = 17.0;
 
 var interaction : RayCast3D;
 var hand : Marker3D;

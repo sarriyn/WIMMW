@@ -31,9 +31,11 @@ func InputCheck(delta : float) -> void:
 	if Input.is_action_pressed("move_forward"):
 		playerMovementPhysics.MoveForward();
 	if Input.is_action_just_pressed("flash_light"):
-		playerFlashlight.ToggleFlashLight(); # LATER, FlashLight should be its OWN separate script
+		playerFlashlight.ToggleFlashLight();
 	if Input.is_action_just_pressed("interact"):
 		playerPickupObject.TryPickupObject();
+	if Input.is_action_just_pressed("tab"):
+		playerControllerReference.playerCameraMovement.TabMenu();
 
 	playerMovementPhysics.DirectionNormalize();
 	playerMovementPhysics.HorizontalAndVerticalVelocityAdjust(delta);
