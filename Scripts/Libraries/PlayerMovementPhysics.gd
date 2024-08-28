@@ -67,7 +67,6 @@ func HorizontalAndVerticalVelocityAdjust(delta : float) -> void:
 
 	if direction != Vector3.ZERO:
 		targetVelocity = direction * speed
-
 	if playerControllerReference.is_on_floor():
 		playerVelocity.x = lerp(playerVelocity.x, targetVelocity.x, delta * effectiveDecel)
 		playerVelocity.z = lerp(playerVelocity.z, targetVelocity.z, delta * effectiveDecel)

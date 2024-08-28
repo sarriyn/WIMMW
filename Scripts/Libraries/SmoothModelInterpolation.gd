@@ -41,6 +41,13 @@ func GetMovementInputVector() -> Vector3:
 	inputVector.y = playerControllerReference.velocity.y
 	inputVector.z = playerControllerReference.velocity.z
 	return inputVector.normalized()
+
+func getCameraSpaceVelocity() -> Vector3:
+	# Transform the player's velocity to the camera's local space using Transform3D multiplication
+	var velocity = playerControllerReference.velocity
+	var cameraTransform = lerpPoint.global_transform
+	var localVelocity = velocity * cameraTransform.basis # Using multiplication operator
+	return localVelocity.normalized()
 	
 func getLerpPointRotationVector(mouseDelta) -> Vector3:
 	# Weapon/hands movement based on mouse movement simulating looking behavior
@@ -55,12 +62,20 @@ func smoothModelInterpolationProcess(delta: float) -> void:
 	rawCameraRoationDelta = adjustForWrapAround(rawCameraRoationDelta)
 	
 	lastLerpRotation = currentCameraRotation
-	# Position
-	var inputVector = GetMovementInputVector()
-	var targetPosition = Vector3(inputVector.x * swayAmount.x, (inputVector.y * swayAmount.y) * 0.222, 0)
+	# Position using transformed velocity in camera space
+	var inputVector = getCameraSpaceVelocity()
+	var targetPosition = Vector3(
+		inputVector.x * swayAmount.x, 
+		(-inputVector.y * swayAmount.y) * 0.222, 
+		-inputVector.z * swayAmount.z  # Include forward/backward sway
+	)
 	# Rotation
 	var rotationVector = getLerpPointRotationVector(mouseDelta)
-	var targetRotation = Vector3((rawCameraRoationDelta.y * swayAmount.y) * 10, (rawCameraRoationDelta.x * swayAmount.x) * 10, 0)
+	var targetRotation = Vector3(
+		(rawCameraRoationDelta.y * swayAmount.y) * 10, 
+		(rawCameraRoationDelta.x * swayAmount.x) * 10, 
+		0
+	)
 	
 	# Smoothly update the roboticFPSRig position for sway effect
 	roboticFPSRig.position = roboticFPSRig.position.lerp(targetPosition + targetRotation, swaySpeed * delta)
