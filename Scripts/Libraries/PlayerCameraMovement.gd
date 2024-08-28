@@ -43,5 +43,5 @@ func CameraMovement(event : InputEvent) -> void:
 func TabMenu() -> void:#swaps the visibility, acts as a toggle between the different camera views while in the tabMenu
 	armsRigMesh.visible = !armsRigMesh.visible
 	playerMesh.visible = !playerMesh.visible
-	sideArmMesh.visible = sideArmMesh.visible
+	sideArmMesh.visible = !sideArmMesh.visible
 	tabCam.current = !tabCam.current#swaps the camera
