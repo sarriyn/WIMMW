@@ -35,7 +35,7 @@ func InputCheck(delta : float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		playerPickupObject.TryPickupObject();
 	if Input.is_action_just_pressed("tab"):
-		playerControllerReference.playerCameraMovement.TabMenu();
+		playerControllerReference.playerCameraMovement.TabMenu();#TODO will be changed to a class when i add more features 
 
 	playerMovementPhysics.DirectionNormalize();
 	playerMovementPhysics.HorizontalAndVerticalVelocityAdjust(delta);
