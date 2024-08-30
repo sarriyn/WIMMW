@@ -2,11 +2,15 @@ extends State;
 class_name WalkingState;
 
 var isWalking : bool;
+var firstPersonCam : Camera3D;
+var tabCam : Camera3D;
 
 func _init(pCR : PlayerController, pSC : PlayerStateController) -> void:
 	playerControllerReference = pCR;
 	playerStateController = pSC;
 	anime = playerControllerReference.get_node("Neck/SAS/AnimationPlayer");
+	firstPersonCam = playerControllerReference.get_node("Neck/Camera3D");
+	tabCam = playerControllerReference.get_node("Neck/tabCam");
 	playerVelocity = playerControllerReference.velocity;
 	isWalking = false;
 
@@ -24,9 +28,9 @@ func Update() -> void:
 	# It's posible to begin falling (walk off the edge)
 	# It's also possible to begin being idle, because you can stop moving
 	anime.play("walk", -1, 2.0, false); # NOTE, if already in WalkingState, we reset the animation
-	if not playerControllerReference.is_on_floor() and (absf(playerControllerReference.velocity.y) > 0):
-		anime.play("falling", -1, 2.0, false);
+	if not playerControllerReference.is_on_floor() and (absf(playerControllerReference.velocity.y) > 0) and not tabCam.current:
 		playerStateController.ChangeState("FallingState");
-	elif (absf(playerControllerReference.velocity.x) + absf(playerControllerReference.velocity.z)) == 0:
-		anime.play("IDLESideArm", -1, 2.0, false);
+	elif (absf(playerControllerReference.velocity.x) + absf(playerControllerReference.velocity.z)) == 0 and not tabCam.current:
 		playerStateController.ChangeState("IdleState");
+	elif tabCam.current:
+		playerStateController.ChangeState("TabMenuState");

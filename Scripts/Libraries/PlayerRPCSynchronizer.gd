@@ -1,14 +1,17 @@
-extends Node;
+extends MultiplayerSynchronizer;
 class_name PlayerRPCSynchronizer;
 # THIS CLASS IS CURRENTLY NOT USED, BUT CAN REMAIN IF WE NEED TO EVER USE IT
 
 var playerController : PlayerController;
 var playerStateController : PlayerStateController;
+var playerTabMenuToggle : PlayerTabMenuToggle;
 
-func initializeNode(pC : PlayerController, pSC : PlayerStateController) -> void:
+func InitializeNode(pC : PlayerController) -> void:
 	playerController = pC;
-	playerStateController = pSC;
+	playerStateController = playerController.playerStateController;
+	playerTabMenuToggle = playerController.playerInputChecker.playerTabMenuToggle;
 
-@rpc("call_local", "any_peer")
-func UpdateStateRPC() -> void:
-	playerStateController.UpdateState();
+#@rpc("any_peer", "call_local")
+#func UpdateCameraCurrentRPC() -> void:
+#	if playerController.name.to_int() == multiplayer.get_remote_sender_id():
+#		playerTabMenuToggle.TabMenu();

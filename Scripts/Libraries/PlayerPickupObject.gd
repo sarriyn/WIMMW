@@ -1,7 +1,9 @@
-extends CharacterBody3D;
+extends RayCast3D;
 class_name PlayerPickupObject;
 
-const pullPower : float = 7.0;
+const pullPower : float = 17.0;
+
+var pickableObjectsSynchronizer : PickableObjectsSynchronizer;
 
 var interaction : RayCast3D;
 var hand : Marker3D;
@@ -10,21 +12,25 @@ var pickedObject : RigidBody3D;
 
 var playerControllerReference : PlayerController;
 
-func _init(playerController : PlayerController) -> void:
+func InitializeNode(playerController : PlayerController) -> void:
 	playerControllerReference = playerController;
 	interaction = playerControllerReference.get_node("Neck/Camera3D/interaction"); # Interaction referes to the players RayCast used for determining if an object is in range to be picked up
 	hand = playerControllerReference.get_node("Neck/Camera3D/hand"); # Hand referes to a Marker3D (basically an empty) that the picked up object will gravitate towards
 	interaction.add_exception(playerControllerReference); # Add exception to the player's collision body
+	pickableObjectsSynchronizer = playerControllerReference.get_parent().get_node("PickableObjectsSynchronizer");
 	pickedObject = null
 	# activeObject = false
-	
+
 func PickObject() -> void:
 	var collider = interaction.get_collider()
 	if collider != null and collider is RigidBody3D:
-		# activeObject = true # Useless as of right now?
-		pickedObject = collider
+		if not pickableObjectsSynchronizer.GetIfObjectLocked(collider.name):
+			pickedObject = collider;
+			# activeObject = true # Useless as of right now?
+			pickableObjectsSynchronizer.OnChangePickableObjectsMultiplayerAuthorityRPC.rpc(pickedObject.name, playerControllerReference.get_multiplayer_authority());
 
 func RemoveObject() -> void:
+	pickableObjectsSynchronizer.OnChangePickableObjectsMultiplayerLockedRPC.rpc(pickedObject.name);
 	pickedObject = null;
 
 func TryPickupObject() -> void:

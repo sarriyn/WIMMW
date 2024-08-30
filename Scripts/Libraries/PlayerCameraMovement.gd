@@ -27,8 +27,6 @@ func _init(playerController : PlayerController, mouseSensitivityDefault : float 
 func CameraMovement(event : InputEvent) -> void:
 	yaw -= event.relative.x * mouseSensitivity;
 	pitch -= event.relative.y * mouseSensitivity;
-	
 	pitch = clamp(pitch, min_pitch, max_pitch); # Makes sure pitch stays within -90 to 90 degrees
-
 	neck.rotation_degrees.y = yaw;
 	camera.rotation_degrees.x = pitch;

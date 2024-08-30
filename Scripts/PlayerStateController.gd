@@ -11,7 +11,8 @@ func _init(playerController : PlayerController):
 	states = {
 		"IdleState" = IdleState.new(playerControllerReference, self),
 		"WalkingState" = WalkingState.new(playerControllerReference, self),
-		"FallingState" = FallingState.new(playerControllerReference, self)
+		"FallingState" = FallingState.new(playerControllerReference, self),
+		"TabMenuState" = TabMenuState.new(playerControllerReference, self)
 	};
 	
 	currentState = states["IdleState"];
