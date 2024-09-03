@@ -41,11 +41,12 @@ func TryPickupObject() -> void:
 
 func PickedObjectMove() -> void:
 	if pickedObject != null:
-		var a = pickedObject.global_transform.origin
-		var b = hand.global_transform.origin
-		var distanceVector = b - a 
-		var distance = distanceVector.length()
+		var a : Vector3 = pickedObject.global_transform.origin
+		var b : Vector3 = hand.global_transform.origin
+		var distanceVector : Vector3 = b - a
+		var distance : float = distanceVector.length()
+		var linearVelocity : Vector3 = distanceVector * pullPower
 
-		pickedObject.set_linear_velocity((b-a)*pullPower) # Moves the cube around
+		pickableObjectsSynchronizer.SendObjectPhysicsData.rpc(pickedObject.name, pickedObject.global_transform.origin, pickedObject.global_transform.basis, linearVelocity, pickedObject.angular_velocity);
 		if distance > 5.0: # Checks if the pickedObject is more that 5 units away
 			RemoveObject(); # Releases the object if it's out of range
