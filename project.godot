@@ -13,7 +13,14 @@ config_version=5
 config/name="WIMMW-main"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=3440
+window/size/viewport_height=1440
+window/size/mode=2
 
 [filesystem]
 
@@ -67,6 +74,10 @@ tab={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_4="SpatialAudio"
+
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
@@ -74,3 +85,4 @@ tab={
 [rendering]
 
 textures/default_filters/anisotropic_filtering_level=4
+anti_aliasing/quality/use_taa=true

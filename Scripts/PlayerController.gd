@@ -29,6 +29,7 @@ func _ready() -> void:
 
 	playerRPCSynchronizer = $Neck/MultiplayerSynchronizer;
 	playerPickupObject = $Neck/Camera3D/interaction;
+	#SpatialAudioPlayer3D = $SoundEffects;
 	
 	playerInputChecker = PlayerInputChecker.new(self) # Initialize PlayerInputChecker and pass self
 	playerCameraMovement = PlayerCameraMovement.new(self, 0.5) # Initialize PlayerCameraMovement and pass self
@@ -38,6 +39,7 @@ func _ready() -> void:
 
 	playerRPCSynchronizer.InitializeNode(self);
 	playerPickupObject.InitializeNode(self);
+	#spatialAudioPlayer3D.InitializeNode(self);
 
 	var robotic_fps_rig = self.get_node("Neck/Camera3D/roboticFPSRig") # Reference to the first-person arm rig
 	var third_person_mesh = self.get_node("Neck/SAS/Armature/Skeleton3D/Cylinder_001") # Reference to the third-person mesh (Cylinder_001)
