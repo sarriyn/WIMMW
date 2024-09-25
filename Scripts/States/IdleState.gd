@@ -13,6 +13,8 @@ func _init(pCR : PlayerController, pSC : PlayerStateController) -> void:
 	tabCam = playerControllerReference.get_node("Neck/tabCam");
 	playerVelocity = playerControllerReference.velocity;
 	isIdle = true;
+	firstPersonCam = playerControllerReference.get_node("Neck/Camera3D");
+	tabCam = playerControllerReference.get_node("Neck/tabCam");
 
 func _to_string() -> String:
 	return "IdleState";
