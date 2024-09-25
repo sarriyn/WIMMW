@@ -36,7 +36,7 @@ func _init(playerController : PlayerController):
 	
 func GetMovementInputVector() -> Vector3:
 	# Weapon/hands movement based on velocity of the player
-	var inputVector = Vector3.ZERO
+	var inputVector : Vector3 = Vector3.ZERO
 	inputVector.x = playerControllerReference.velocity.x
 	inputVector.y = playerControllerReference.velocity.y
 	inputVector.z = playerControllerReference.velocity.z
@@ -44,34 +44,34 @@ func GetMovementInputVector() -> Vector3:
 
 func getCameraSpaceVelocity() -> Vector3:
 	# Transform the player's velocity to the camera's local space using Transform3D multiplication
-	var velocity = playerControllerReference.velocity
-	var cameraTransform = lerpPoint.global_transform
-	var localVelocity = velocity * cameraTransform.basis # Using multiplication operator
+	var velocity : Vector3 = playerControllerReference.velocity
+	var cameraTransform : Transform3D = lerpPoint.global_transform
+	var localVelocity : Vector3 = velocity * cameraTransform.basis # Using multiplication operator
 	return localVelocity.normalized()
 	
 func getLerpPointRotationVector(mouseDelta) -> Vector3:
 	# Weapon/hands movement based on mouse movement simulating looking behavior
-	var lerpRotationVector = Vector3.ZERO
+	var lerpRotationVector : Vector3 = Vector3.ZERO
 	lerpRotationVector.x = mouseDelta.x
 	lerpRotationVector.y = mouseDelta.y
 	return lerpRotationVector.normalized()
 	
-func smoothModelInterpolationProcess(delta: float) -> void:
-	var currentCameraRotation = lerpPoint.global_transform.basis.get_euler()
-	var rawCameraRoationDelta = currentCameraRotation - lastLerpRotation
+func SmoothModelInterpolationProcess(delta: float) -> void:
+	var currentCameraRotation : Vector3 = lerpPoint.global_transform.basis.get_euler()
+	var rawCameraRoationDelta : Vector3 = currentCameraRotation - lastLerpRotation
 	rawCameraRoationDelta = adjustForWrapAround(rawCameraRoationDelta)
 	
 	lastLerpRotation = currentCameraRotation
 	# Position using transformed velocity in camera space
-	var inputVector = getCameraSpaceVelocity()
-	var targetPosition = Vector3(
+	var inputVector : Vector3 = getCameraSpaceVelocity()
+	var targetPosition : Vector3 = Vector3(
 		inputVector.x * swayAmount.x, 
 		(-inputVector.y * swayAmount.y) * 0.222, 
 		-inputVector.z * swayAmount.z  # Include forward/backward sway
 	)
 	# Rotation
-	var rotationVector = getLerpPointRotationVector(mouseDelta)
-	var targetRotation = Vector3(
+	#var rotationVector : Vector3 = getLerpPointRotationVector(mouseDelta)
+	var targetRotation : Vector3 = Vector3(
 		(rawCameraRoationDelta.y * swayAmount.y) * 10, 
 		(rawCameraRoationDelta.x * swayAmount.x) * 10, 
 		0

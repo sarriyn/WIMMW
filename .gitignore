@@ -7,11 +7,17 @@
 /.tmp.driveupload/
 /.tmp.drivedownload/
 /PhysicsObjects/
+/StaticObjects/
+/Audio/
+/Rsc/
 
 # Godot-specific ignores
 .import/
 export.cfg
 export_presets.cfg
+.wav
+.mp3
+.ogg
 
 # Imported translations (automatically generated from CSV files)
 *.translation

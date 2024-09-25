@@ -51,10 +51,10 @@ func onHostPressed() -> void:
 func onJoinPressed() -> void:
 	if not isSingleplayer:
 		if address.text.length() > 0:
+			SpawnWorld();
 			peer.create_client(address.text, 9001);
 			multiplayer.multiplayer_peer = peer;
-			SpawnWorld();
 		else:
+			SpawnWorld();
 			peer.create_client("localhost", 9001);
 			multiplayer.multiplayer_peer = peer;
-			SpawnWorld();
